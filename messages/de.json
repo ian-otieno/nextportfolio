@@ -1,0 +1,53 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "about": "Über mich",
+    "services": "Dienstleistungen",
+    "projects": "Projekte",
+    "education": "Ausbildung",
+    "skills": "Fähigkeiten",
+    "experience": "Erfahrung",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "welcome": "Willkommen in meinem Portfolio",
+    "description": "Ich bin ein leidenschaftlicher Webentwickler, der erstaunliche digitale Erlebnisse schafft.",
+    "downloadResume": "Lebenslauf herunterladen",
+    "learnMore": "Mehr erfahren"
+  },
+  "about": {
+    "title": "Über mich",
+    "description1": "Ich bin ein engagierter und leidenschaftlicher Softwareentwickler mit einem Bachelor of Science in Public Administration and Leadership von der Jomo Kenyatta University of Agriculture and Technology (JKUAT), ergänzt durch eine Full-Stack-Entwicklungszertifizierung von der Moringa School.",
+    "description2": "Neben meiner Expertise in der Webentwicklung bringe ich wertvolle Fähigkeiten in Microsoft SQL, Azure DevOps, VB.Net, ASP.NET Core und C# mit, die es mir ermöglichen, robuste und skalierbare Lösungen zu entwickeln.",
+    "description3": "Ich bin stets bestrebt, herausfordernde Projekte anzunehmen, mit funktionsübergreifenden Teams zusammenzuarbeiten und mein technisches Wissen kontinuierlich zu erweitern, um Innovation und berufliches Wachstum voranzutreiben."
+  },
+  "services": {
+    "title": "Dienstleistungen",
+    "webDev": {
+      "title": "Webentwicklung",
+      "description": "Entwicklung maßgeschneiderter Websites und Webanwendungen mit modernen Technologien."
+    },
+    "uiux": {
+      "title": "UI/UX Design",
+      "description": "Gestaltung intuitiver und visuell ansprechender Benutzeroberflächen und Erlebnisse."
+    },
+    "seo": {
+      "title": "SEO-Optimierung",
+      "description": "Verbesserung der Sichtbarkeit und Ranking von Websites in Suchmaschinenergebnissen."
+    },
+    "consultation": {
+      "title": "Beratung",
+      "description": "Expertenberatung zu Webtechnologien, Projektmanagement und digitalen Strategien."
+    }
+  },
+  "contact": {
+    "title": "Kontakt aufnehmen",
+    "name": "Ihr Name",
+    "email": "Ihre E-Mail",
+    "message": "Ihre Nachricht",
+    "send": "Nachricht senden"
+  },
+  "footer": {
+    "rights": "© 2023 Mein Portfolio. Alle Rechte vorbehalten."
+  }
+}
