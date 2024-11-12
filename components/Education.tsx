@@ -11,19 +11,29 @@ const educationData = [
     type: 'Education',
     icon: GraduationCapIcon,
     items: [
-      {
-        title: 'Bachelor of Science in Computer Science',
-        institution: 'University of Technology',
-        year: '2015 - 2019',
-        logo: 'https://source.unsplash.com/random/100x100?university',
-        certificateLink: 'https://example.com/certificate1',
+      { 
+        title: 'Professional Certificate in Software Engineering', 
+        institution: 'Moringa School', 
+        year: 'Nov 2021 - May 2022', 
+        logo: '/images/ZzZgytR8_400x400.png', 
+        details: 'Specialized in Python, Flask, Django, PostgreSQL, JavaScript, and React.' ,
+        certificateLink: 'https://drive.google.com/file/d/1-uByx356CVkz--7Z5pUTkqPaT3l22bvt/view?usp=sharing' 
       },
-      {
-        title: 'Master of Science in Web Engineering',
-        institution: 'Digital University',
-        year: '2020 - 2022',
-        logo: 'https://source.unsplash.com/random/100x100?college',
-        certificateLink: 'https://example.com/certificate2',
+      { 
+        title: 'Bachelor of Science in Public Administration and Leadership', 
+        institution: 'Jomo Kenyatta University of Agriculture and Technology', 
+        year: 'Aug 2016 - Nov 2020', 
+        logo: '/images/ubpti3cctxwrkknblma2.png', 
+        details: 'GPA: Second Class Honours (Upper Division)', 
+        certificateLink: 'https://drive.google.com/file/d/19iKKIhrPm6_13ZxXcj1tfpG9W0HUTBnT/view?usp=sharing' 
+      },
+      { 
+        title: 'KCSE', 
+        institution: 'Ambira High School', 
+        year: 'Feb 2012 - Nov 2015', 
+        logo: '/images/1510643987-62-ambira-high-school.jpg', 
+        details: 'Mean Grade: B+',
+        certificateLink: 'https://drive.google.com/file/d/127RGOTahVDYlqtZl7BN0pINn8TNMXP4p/view?usp=sharing'  
       },
     ],
   },
@@ -31,26 +41,42 @@ const educationData = [
     type: 'Certifications',
     icon: AwardIcon,
     items: [
-      {
-        title: 'AWS Certified Developer - Associate',
-        institution: 'Amazon Web Services',
-        year: '2021',
-        logo: 'https://source.unsplash.com/random/100x100?aws',
-        certificateLink: 'https://example.com/aws-certificate',
+      { 
+        title: 'Introduction to programming', 
+        institution: 'Moringa School', 
+        year: '2022', 
+        logo: '/images/ZzZgytR8_400x400.png', 
+        certificateLink: 'https://drive.google.com/file/d/1zrf9s10GYMK3L5aUxTD95AEsnHzqPjzH/view?usp=sharing' 
       },
-      {
-        title: 'Google Professional Cloud Developer',
-        institution: 'Google Cloud',
-        year: '2022',
-        logo: 'https://source.unsplash.com/random/100x100?google',
-        certificateLink: 'https://example.com/google-certificate',
+
+      { 
+        title: ' Javascript', 
+        institution: 'Linkedin-Learning', 
+        year: '2023', 
+        logo: '/images/Linkedin-Learning-Web.png', 
+        certificateLink: 'https://lnkd.in/dfVE3MNf' 
       },
-      {
-        title: 'React Native Specialist',
-        institution: 'React Native Academy',
-        year: '2023',
-        logo: 'https://source.unsplash.com/random/100x100?react',
-        certificateLink: 'https://example.com/react-certificate',
+
+      { 
+        title: ' Azure DevOps', 
+        institution: 'Linkedin-Learning', 
+        year: '2023', 
+        logo: '/images/Linkedin-Learning-Web.png', 
+        certificateLink: 'https://lnkd.in/dmbu2Xgg' 
+      },
+      { 
+        title: 'Microsoft SQL Server 2022', 
+        institution: 'Linkedin-Learning', 
+        year: '2023', 
+        logo: '/images/Linkedin-Learning-Web.png', 
+        certificateLink: 'https://lnkd.in/dw68Am4C ' 
+      },
+      { 
+        title: 'Oracle database', 
+        institution: 'Linkedin-Learning', 
+        year: '2022', 
+        logo: '/images/Linkedin-Learning-Web.png', 
+        certificateLink: 'https://lnkd.in/dp8EWjSt' 
       },
     ],
   },

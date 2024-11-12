@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { motion } from 'framer-motion';
 import { MoonIcon, SunIcon } from 'lucide-react';
@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import LanguageSelector from './LanguageSelector';
+import { useEffect, useState } from 'react';
 
 interface Messages {
   navigation: {
@@ -25,11 +26,19 @@ interface HeaderProps {
   messages: Messages;
 }
 
-const Header = ({ messages }: HeaderProps) => {
+export default function Header({ messages }: HeaderProps) {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
 
-  // Default navigation items in English as fallback
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   const defaultNavItems = [
     { key: 'about', label: 'About' },
     { key: 'services', label: 'Services' },
@@ -40,7 +49,6 @@ const Header = ({ messages }: HeaderProps) => {
     { key: 'contact', label: 'Contact' }
   ];
 
-  // Use messages if available, otherwise use default labels
   const navItems = messages?.navigation ? [
     { key: 'about', label: messages.navigation.about },
     { key: 'services', label: messages.navigation.services },
@@ -56,7 +64,7 @@ const Header = ({ messages }: HeaderProps) => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="fixed w-full bg-background/80 backdrop-blur-sm z-50"
+      className="fixed w-full bg-background/80 backdrop-blur-sm z-50 h-16"
     >
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
         <motion.h1
@@ -68,21 +76,7 @@ const Header = ({ messages }: HeaderProps) => {
           <Link href="/">{messages?.navigation?.home || 'Home'}</Link>
         </motion.h1>
         <div className="flex items-center space-x-4">
-          <ul className="flex space-x-4 items-center">
-            {navItems.map((item, index) => (
-              <motion.li
-                key={item.key}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * (index + 1) }}
-              >
-                <Link href={`/${item.key}`} className="hover:text-primary">
-                  {item.label}
-                </Link>
-              </motion.li>
-            ))}
-          </ul>
-          <LanguageSelector />
+         
           <Button
             variant="ghost"
             size="icon"
@@ -96,6 +90,4 @@ const Header = ({ messages }: HeaderProps) => {
       </nav>
     </motion.header>
   );
-};
-
-export default Header;
+}

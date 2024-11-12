@@ -1,10 +1,11 @@
 import '../globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { ThemeProvider } from "@/components/theme-provider";
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Providers } from '@/components/providers';
+import Sidebar from '@/components/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,15 +16,11 @@ export const metadata: Metadata = {
 
 async function getMessages(locale: string) {
   try {
-    const messages = (await import(`../../messages/${locale}.json`)).default;
-    return messages;
+    return (await import(`../../messages/${locale}.json`)).default;
   } catch (error) {
-    console.error(`Failed to load messages for locale ${locale}:`, error);
-    // Fallback to English messages if the requested locale fails to load
     try {
       return (await import('../../messages/en.json')).default;
     } catch (fallbackError) {
-      console.error('Failed to load fallback messages:', fallbackError);
       return null;
     }
   }
@@ -39,7 +36,7 @@ export function generateStaticParams() {
   ];
 }
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
   params: { locale }
 }: {
@@ -53,23 +50,17 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <div className="flex flex-col min-h-screen">
-            <Header messages={messages} />
-            <main className="flex-grow">
-              {children}
-            </main>
-            <Footer messages={messages} />
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
+    <Providers>
+      <div className={`${inter.className} flex flex-col min-h-screen`}>
+        <Header messages={messages} />
+        <div className="flex flex-1 pt-[5px]">
+          <Sidebar messages={messages} />
+          <main className="flex-1 ml-64">
+            {children}
+          </main>
+        </div>
+        <Footer messages={messages} />
+      </div>
+    </Providers>
   );
 }

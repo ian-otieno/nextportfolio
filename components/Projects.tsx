@@ -1,33 +1,47 @@
-"use client"
+"use client";
 
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ExternalLinkIcon, GithubIcon } from 'lucide-react';
-import Image from 'next/image';
+import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'; // Using react-icons for colored icons
 
 const projects = [
   {
-    title: 'E-commerce Platform',
-    description: 'A full-stack e-commerce solution with React and Node.js.',
-    image: '/images/project1.jpg',
-    github: 'https://github.com',
+    title: 'Safiri - Backend/Frontend',
+    description: 'Full-stack application built with Django for the backend and HTML & Bootstrap for the frontend.',
+    github: 'https://github.com/ian-otieno/Backend-Safiri',
     live: 'https://example.com',
   },
   {
-    title: 'Task Management App',
-    description: 'A productivity app built with React and Firebase.',
-    image: '/images/project2.jpg',
-    github: 'https://github.com',
+    title: 'Django Neighbourhood',
+    description: 'A neighborhood information app developed with Django, Flask, Bootstrap, HTML, and CSS.',
+    github: 'https://github.com/ian-otieno/Django-Neighbourhood',
     live: 'https://example.com',
   },
   {
-    title: 'Weather Dashboard',
-    description: 'A weather app using OpenWeatherMap API and Vue.js.',
-    image: '/images/project3.jpg',
-    github: 'https://github.com',
+    title: 'News App',
+    description: 'A news aggregation app built with Django, Flask, Bootstrap, HTML & CSS.',
+    github: 'https://github.com/ian-otieno/News-App',
     live: 'https://example.com',
   },
+  {
+    title: 'Pitches App',
+    description: 'A pitch management app developed with Flask and Bootstrap.',
+    github: 'https://github.com/ian-otieno/pitches-app',
+    live: 'https://example.com',
+  },
+  {
+    title: 'Django Awards',
+    description: 'A platform to manage awards and nominations built with Django.',
+    github: 'https://github.com/ian-otieno/Django-Awards',
+    live: 'https://example.com',
+  },
+  {
+    title: 'Quotes-App',
+    description: 'An Angular CLI application that displays quotes, allows users to input new quotes, upvote, downvote, and delete them.',
+    github: '',
+    live: 'https://ian-otieno.github.io/Quotes-App/',
+  }
 ];
 
 const Projects = () => {
@@ -42,7 +56,7 @@ const Projects = () => {
         >
           My Projects
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
@@ -50,23 +64,24 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full flex flex-col">
+              <Card className="h-full flex flex-col transform hover:scale-105 transition-all duration-300">
                 <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
+                  <CardTitle className="text-xl font-semibold">{project.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                  <Image src={project.image} alt={project.title} width={800} height={600} className="w-full h-48 object-cover rounded-md mb-4" />
-                  <p>{project.description}</p>
+                  <p className="text-gray-700">{project.description}</p>
                 </CardContent>
-                <CardFooter className="flex justify-between">
-                  <Button asChild variant="outline">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <GithubIcon className="mr-2 h-4 w-4" /> GitHub
-                    </a>
-                  </Button>
+                <CardFooter className="flex justify-between items-center mt-4">
+                  {project.github && (
+                    <Button asChild variant="outline">
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-blue-600 hover:text-blue-800">
+                        <FaGithub className="mr-2 h-5 w-5" /> GitHub
+                      </a>
+                    </Button>
+                  )}
                   <Button asChild>
-                    <a href={project.live} target="_blank" rel="noopener noreferrer">
-                      <ExternalLinkIcon className="mr-2 h-4 w-4" /> Live Demo
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="flex items-center text-green-600 hover:text-green-800">
+                      <FaExternalLinkAlt className="mr-2 h-5 w-5" /> Live Demo
                     </a>
                   </Button>
                 </CardFooter>
