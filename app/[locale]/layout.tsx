@@ -59,7 +59,7 @@ export default async function LocaleLayout({
             {children}
           </main>
         </div>
-        <Footer messages={messages} />
+        <Footer />
       </div>
     </Providers>
   );
