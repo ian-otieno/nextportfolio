@@ -34,8 +34,8 @@ const calculateDuration = (startDate: Date, endDate: Date = new Date()) => {
 
 const experiences = [
   {
-    title: 'Software Developer',
-    company: 'CoreBankingSystem Fintech Group Kenya',
+    title: 'Software Developer CoreBankingSystems',
+    company: ' Fintech Group Kenya',
     startDate: new Date(2023, 8), // September 2023
     endDate: null, // Present
     location: 'Nairobi, Kenya',
