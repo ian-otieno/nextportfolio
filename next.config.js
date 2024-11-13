@@ -13,11 +13,8 @@ const nextConfig = {
     ],
   },
   experimental: {
-    optimizeCss: true,
     turbo: {
-      loaders: {
-        '.svg': ['@svgr/webpack'],
-      },
+      // Additional configurations go here
     },
   },
 };
