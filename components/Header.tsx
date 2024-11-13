@@ -6,7 +6,6 @@ import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import LanguageSelector from './LanguageSelector';
 import { useEffect, useState } from 'react';
 
 interface Messages {
@@ -23,8 +22,9 @@ interface Messages {
 }
 
 interface HeaderProps {
-  messages: Messages;
+  messages?: Messages;
 }
+
 
 export default function Header({ messages }: HeaderProps) {
   const { theme, setTheme } = useTheme();

@@ -1,13 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  eslint: {
-    ignoreDuringBuilds: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'source.unsplash.com',
+      }
+    ],
   },
-  images: { unoptimized: true },
   experimental: {
-    appDir: true,
-  }
+    optimizeCss: true,
+    turbo: {
+      loaders: {
+        '.svg': ['@svgr/webpack'],
+      },
+    },
+  },
 };
 
 module.exports = nextConfig;
