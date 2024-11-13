@@ -8,40 +8,45 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'; // Using react-ico
 const projects = [
   {
     title: 'Safiri - Backend/Frontend',
-    description: 'Full-stack application built with Django for the backend and HTML & Bootstrap for the frontend.',
+    description: 'Full-stack application built with Django for the backend and Rectjs for the frontend.',
     github: 'https://github.com/ian-otieno/Backend-Safiri',
-    live: 'https://example.com',
+    live: 'https://safiri-app.netlify.app/',
   },
+  {
+    title: 'My Portfolio',
+    description: 'My portfolo app built with next.js for frontend.',
+    github: 'https://github.com/ian-otieno/Backend-Safiri',
+    live: 'https://nextportfolio-b39j-bar7vi7lu-ian-otienos-projects.vercel.app/',
+  },
+
+  {
+    title: 'News App',
+    description: 'A news aggregation app built with Django, Flask, Bootstrap, HTML & CSS.',
+    github: 'https://github.com/ian-otieno/News-App',
+    live: 'https://news-app-q0wp.onrender.com/',
+  },
+
   {
     title: 'Django Neighbourhood',
     description: 'A neighborhood information app developed with Django, Flask, Bootstrap, HTML, and CSS.',
     github: 'https://github.com/ian-otieno/Django-Neighbourhood',
     live: 'https://example.com',
   },
-  {
-    title: 'News App',
-    description: 'A news aggregation app built with Django, Flask, Bootstrap, HTML & CSS.',
-    github: 'https://github.com/ian-otieno/News-App',
-    live: 'https://example.com',
+   {
+    title: 'Quotes-App',
+    description: 'An Angular CLI application that displays quotes, allows users to input new quotes, upvote, downvote, and delete them.',
+    github: '',
+    live: 'https://ian-otieno.github.io/Quotes-App/',
   },
+  
   {
     title: 'Pitches App',
     description: 'A pitch management app developed with Flask and Bootstrap.',
     github: 'https://github.com/ian-otieno/pitches-app',
     live: 'https://example.com',
-  },
-  {
-    title: 'Django Awards',
-    description: 'A platform to manage awards and nominations built with Django.',
-    github: 'https://github.com/ian-otieno/Django-Awards',
-    live: 'https://example.com',
-  },
-  {
-    title: 'Quotes-App',
-    description: 'An Angular CLI application that displays quotes, allows users to input new quotes, upvote, downvote, and delete them.',
-    github: '',
-    live: 'https://ian-otieno.github.io/Quotes-App/',
   }
+
+ 
 ];
 
 const Projects = () => {
