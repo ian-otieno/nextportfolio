@@ -8,27 +8,34 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'; // Using react-ico
 const projects = [
   {
     title: 'Safiri - Backend/Frontend',
-    description: 'Full-stack application built with Django for the backend and Rectjs for the frontend.',
+    description: 'Full-stack application built with Django for the backend and React.Js for the frontend.',
     github: 'https://github.com/ian-otieno/Backend-Safiri',
     live: 'https://safiri-app.netlify.app/',
   },
   {
     title: 'My Portfolio',
-    description: 'My portfolo app built with next.js for frontend.',
+    description: 'My portfolo app built with Next.Js for frontend.',
     github: 'https://github.com/ian-otieno/Backend-Safiri',
-    live: 'https://nextportfolio-b39j-bar7vi7lu-ian-otienos-projects.vercel.app/',
+    live: 'https://ianoportflolio.netlify.app/',
   },
 
   {
     title: 'News App',
-    description: 'A news aggregation app built with Django, Flask, Bootstrap, HTML & CSS.',
+    description: 'A news aggregation app built with Flask, Bootstrap, HTML & CSS.',
     github: 'https://github.com/ian-otieno/News-App',
     live: 'https://news-app-q0wp.onrender.com/',
   },
 
   {
+    title: 'Git Search',
+    description: 'A git clone web app using Agular.Js.',
+    github: 'https://github.com/ian-otieno/Git-Search',
+    live: 'https://ian-otieno.github.io/Git-Search/',
+  },
+
+  {
     title: 'Django Neighbourhood',
-    description: 'A neighborhood information app developed with Django, Flask, Bootstrap, HTML, and CSS.',
+    description: 'A neighborhood information app developed with Django, Bootstrap, HTML, and CSS.',
     github: 'https://github.com/ian-otieno/Django-Neighbourhood',
     live: 'https://example.com',
   },
@@ -39,12 +46,7 @@ const projects = [
     live: 'https://ian-otieno.github.io/Quotes-App/',
   },
   
-  {
-    title: 'Pitches App',
-    description: 'A pitch management app developed with Flask and Bootstrap.',
-    github: 'https://github.com/ian-otieno/pitches-app',
-    live: 'https://example.com',
-  }
+  
 
  
 ];
