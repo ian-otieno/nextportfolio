@@ -7,6 +7,19 @@ import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt, FaClock } from 'react-icons
 import { SiCsharp, SiDotnet, SiMicrosoftsqlserver, SiAzuredevops, SiBootstrap } from 'react-icons/si'
 import { GiTechnoHeart } from 'react-icons/gi'
 
+// Define the type for tech stack icons
+type TechIcons = {
+  [key: string]: React.ComponentType<any>
+}
+
+const iconMap: TechIcons = {
+  'C#': SiCsharp,
+  'ASP.NET Core': SiDotnet,
+  'Microsoft SQL': SiMicrosoftsqlserver,
+  'Azure DevOps': SiAzuredevops,
+  'Bootstrap': SiBootstrap,
+}
+
 const calculateDuration = (startDate: Date, endDate: Date = new Date()) => {
   const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 + endDate.getMonth() - startDate.getMonth()
   const years = Math.floor(months / 12)
@@ -85,14 +98,6 @@ const experiences = [
     techStack: [],
   },
 ]
-
-const iconMap = {
-  'C#': SiCsharp,
-  'ASP.NET Core': SiDotnet,
-  'Microsoft SQL': SiMicrosoftsqlserver,
-  'Azure DevOps': SiAzuredevops,
-  'Bootstrap': SiBootstrap,
-}
 
 const iconAnimation = {
   hidden: { scale: 0.5, opacity: 0 },
@@ -191,8 +196,8 @@ export default function CareerTimeline() {
                   </ul>
                   {exp.techStack.length > 0 && (
                     <div>
-                      <h4 className="font-semibold mb-2">Tech Stack:</h4>
-                      <div className="flex flex-wrap gap-2">
+                      <h4 className="text-lg font-semibold text-primary">Technologies:</h4>
+                      <div className="flex flex-wrap space-x-4">
                         {exp.techStack.map((tech, techIndex) => {
                           const TechIcon = iconMap[tech] || GiTechnoHeart
                           return (
@@ -200,11 +205,10 @@ export default function CareerTimeline() {
                               key={techIndex}
                               initial="hidden"
                               whileInView="visible"
-                              whileHover={{ scale: 1.1 }}
                               variants={iconAnimation}
-                              className="flex items-center bg-secondary text-secondary-foreground rounded-full px-3 py-1 text-sm"
+                              className="flex items-center justify-center text-2xl text-primary"
                             >
-                              <TechIcon className="mr-1 h-4 w-4" />
+                              <TechIcon className="text-secondary" />
                               {tech}
                             </motion.div>
                           )
