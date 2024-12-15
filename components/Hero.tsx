@@ -16,7 +16,7 @@ const carouselMessages = [
 ];
 
 // Description message
-const descriptionMessage = "I'm a passionate web developer creating amazing digital experiences.";
+const descriptionMessage = "";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -103,7 +103,7 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.8 }}
         >
           <Button asChild variant="outline" className="group">
-            <a href="https://drive.google.com/file/d/1ipKTtnk2dFxogMqvjS4VH37PxrHJWLDP/view?usp=sharing" download className="flex items-center">
+            <a href="https://drive.google.com/file/d/1yk3DTLshEEKpgIftjHFBK0TtvhCCPdKn/view?usp=sharing" download className="flex items-center">
               <FaDownload className="mr-2 h-4 w-4 group-hover:animate-bounce" /> 
               <span className="text-base">Download Resume</span>
             </a>
