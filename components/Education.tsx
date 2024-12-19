@@ -1,9 +1,11 @@
-"use client"
+'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { GraduationCapIcon, AwardIcon, ExternalLinkIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Card, CardContent } from '@/components/ui/card'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { GraduationCapIcon, AwardIcon, ExternalLinkIcon } from 'lucide-react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 
@@ -97,105 +99,148 @@ const educationData: SectionData[] = [
   },
 ]
 
-// Define types for the EducationItem component props
-interface EducationItemProps {
-  item: EducationItemData
-  isOpen: boolean
-  toggleOpen: () => void
-}
-
-const EducationItem: React.FC<EducationItemProps> = ({ item, isOpen, toggleOpen }) => {
-  return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-      className="mb-6 last:mb-0"
-    >
-      <div className="flex items-center cursor-pointer" onClick={toggleOpen}>
-        <Image src={item.logo} alt={`${item.institution} logo`} width={50} height={50} className="rounded-full mr-4" />
-        <div className="flex-grow">
-          <h3 className="font-semibold">{item.title}</h3>
-          <p className="text-sm text-muted-foreground">{item.institution}</p>
-          <p className="text-sm text-muted-foreground">{item.year}</p>
-        </div>
-        {isOpen ? <ChevronUpIcon className="h-5 w-5" /> : <ChevronDownIcon className="h-5 w-5" />}
-      </div>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-2 ml-16"
-          >
-            {item.details && <p className="text-sm mb-2">{item.details}</p>}
-            <Button asChild variant="link" className="p-0 h-auto">
-              <a href={item.certificateLink} target="_blank" rel="noopener noreferrer">
-                View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
-              </a>
-            </Button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  )
-}
-
 export default function Education() {
-  const [openItems, setOpenItems] = useState<Record<string, boolean>>({})
-
-  const toggleItem = (sectionIndex: number, itemIndex: number) => {
-    setOpenItems(prev => ({
-      ...prev,
-      [`${sectionIndex}-${itemIndex}`]: !prev[`${sectionIndex}-${itemIndex}`]
-    }))
-  }
-
   return (
-    <section id="education" className="py-20 bg-background">
+    <section id="education" className="py-20 bg-gradient-to-b from-background to-secondary/20">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl font-bold text-center mb-12"
+          className="text-4xl font-bold text-center mb-12"
         >
           Education & Certifications
         </motion.h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {educationData.map((section, sectionIndex) => (
-            <motion.div
-              key={section.type}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: sectionIndex * 0.1 }}
-            >
-              <Card className="h-full">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-2xl">
-                    <section.icon className="mr-2 h-6 w-6" />
-                    {section.type}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {section.items.map((item, itemIndex) => (
-                    <EducationItem
-                      key={item.title}
-                      item={item}
-                      isOpen={!!openItems[`${sectionIndex}-${itemIndex}`]}
-                      toggleOpen={() => toggleItem(sectionIndex, itemIndex)}
-                    />
-                  ))}
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+
+        <Tabs defaultValue="education" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
+            <TabsTrigger value="education" className="text-lg">
+              <GraduationCapIcon className="mr-2 h-5 w-5" />
+              Education
+            </TabsTrigger>
+            <TabsTrigger value="certifications" className="text-lg">
+              <AwardIcon className="mr-2 h-5 w-5" />
+              Certifications
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="education">
+            <EducationTimeline items={educationData[0].items} />
+          </TabsContent>
+          <TabsContent value="certifications">
+            <CertificationsGrid items={educationData[1].items} />
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
+  )
+}
+
+function EducationTimeline({ items }: { items: EducationItemData[] }) {
+  return (
+    <div className="space-y-8">
+      {items.map((item, index) => (
+        <EducationItem key={index} item={item} index={index} />
+      ))}
+    </div>
+  )
+}
+
+function EducationItem({ item, index }: { item: EducationItemData; index: number }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <motion.div
+      className="flex items-start"
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <div className="flex-shrink-0 mr-4">
+        <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full" />
+      </div>
+      <div className="flex-grow">
+        <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
+        <p className="text-sm text-muted-foreground mb-1">{item.institution}</p>
+        <p className="text-sm text-muted-foreground mb-2">{item.year}</p>
+        {item.details && <p className="text-sm mb-2">{item.details}</p>}
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <Button variant="link" className="p-0 h-auto">
+              View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{item.title}</DialogTitle>
+            </DialogHeader>
+            <div className="mt-4">
+              <Image src={item.logo} alt={`${item.institution} logo`} width={80} height={80} className="rounded-full mb-4 mx-auto" />
+              <p className="text-center mb-1">{item.institution}</p>
+              <p className="text-center text-sm text-muted-foreground mb-4">{item.year}</p>
+              <div className="flex justify-center">
+                <Button asChild variant="default">
+                  <a href={item.certificateLink} target="_blank" rel="noopener noreferrer">
+                    View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </motion.div>
+  )
+}
+
+function CertificationsGrid({ items }: { items: EducationItemData[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      {items.map((item, index) => (
+        <CertificationCard key={index} item={item} index={index} />
+      ))}
+    </div>
+  )
+}
+
+function CertificationCard({ item, index }: { item: EducationItemData; index: number }) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+    >
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300">
+            <CardContent className="p-4 flex flex-col items-center justify-center h-full">
+              <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
+              <h3 className="font-semibold text-center text-sm">{item.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{item.year}</p>
+            </CardContent>
+          </Card>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{item.title}</DialogTitle>
+          </DialogHeader>
+          <div className="mt-4">
+            <Image src={item.logo} alt={`${item.institution} logo`} width={80} height={80} className="rounded-full mb-4 mx-auto" />
+            <p className="text-center mb-1">{item.institution}</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {item.year}
+            </p>
+            <div className="flex justify-center">
+              <Button asChild variant="default">
+                <a href={item.certificateLink} target="_blank" rel="noopener noreferrer">
+                  View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </motion.div>
   )
 }

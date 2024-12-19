@@ -30,7 +30,7 @@ export default function About() {
         >
           About Me
         </motion.h2>
-        
+
         <div className="flex flex-col lg:flex-row items-center mb-12 space-y-8 lg:space-y-0 lg:space-x-8">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -49,7 +49,7 @@ export default function About() {
               />
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -121,7 +121,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card 
+              <Card
                 className="h-full hover:shadow-lg transition-all duration-300 p-4 cursor-pointer bg-card/50 backdrop-blur-sm"
                 onClick={() => setExpandedHobby(expandedHobby === index ? null : index)}
               >

@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
+import { Button } from '@/components/ui/button'
+import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt, FaClock, FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { SiCsharp, SiDotnet, SiMicrosoftsqlserver, SiAzuredevops, SiBootstrap } from 'react-icons/si'
 import { GiTechnoHeart } from 'react-icons/gi'
 
@@ -106,6 +107,8 @@ const iconAnimation = {
 
 export default function CareerTimeline() {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  const [filter, setFilter] = useState<string | null>(null)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -114,6 +117,14 @@ export default function CareerTimeline() {
 
     return () => clearInterval(timer)
   }, [])
+
+  const toggleExpand = (index: number) => {
+    setExpandedIndex(expandedIndex === index ? null : index)
+  }
+
+  const filteredExperiences = filter
+    ? experiences.filter(exp => exp.techStack.includes(filter))
+    : experiences
 
   return (
     <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
@@ -126,101 +137,136 @@ export default function CareerTimeline() {
         >
           Professional Experience
         </motion.h2>
-        <div className="space-y-12">
-          {experiences.map((exp, index) => (
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          <Button
+            variant={filter === null ? "default" : "outline"}
+            onClick={() => setFilter(null)}
+          >
+            All
+          </Button>
+          {Array.from(new Set(experiences.flatMap(exp => exp.techStack))).map(tech => (
+            <Button
+              key={tech}
+              variant={filter === tech ? "default" : "outline"}
+              onClick={() => setFilter(tech)}
+            >
+              {tech}
+            </Button>
+          ))}
+        </div>
+        <AnimatePresence>
+          {filteredExperiences.map((exp, index) => (
             <motion.div
               key={exp.title}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="overflow-hidden">
-                <CardHeader className="bg-primary text-primary-foreground">
-                  <CardTitle className="flex items-center text-xl">
-                    <motion.div
-                      initial="hidden"
-                      whileInView="visible"
-                      variants={iconAnimation}
-                    >
-                      <FaBriefcase className="mr-2 h-6 w-6 text-secondary" />
-                    </motion.div>
-                    {exp.title} at {exp.company}
+              <Card className="overflow-hidden mb-8">
+                <CardHeader
+                  className="bg-primary text-primary-foreground cursor-pointer"
+                  onClick={() => toggleExpand(index)}
+                >
+                  <CardTitle className="flex items-center justify-between text-xl">
+                    <div className="flex items-center">
+                      <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        variants={iconAnimation}
+                      >
+                        <FaBriefcase className="mr-2 h-6 w-6" color="#ff6347" />
+                      </motion.div>
+                      {exp.title} at {exp.company}
+                    </div>
+                    {expandedIndex === index ? <FaChevronUp color="#ff6347" /> : <FaChevronDown color="#ff6347" />}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pt-6">
-                  <div className="flex flex-wrap items-center mb-4 text-sm text-muted-foreground">
+                <AnimatePresence>
+                  {expandedIndex === index && (
                     <motion.div
-                      initial="hidden"
-                      whileInView="visible"
-                      variants={iconAnimation}
-                      className="flex items-center mr-4 mb-2"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
                     >
-                      <FaCalendarAlt className="mr-2 text-primary" />
-                      <span>
-                        {exp.startDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} - {' '}
-                        {exp.endDate ? exp.endDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : `Present (${currentYear})`}
-                      </span>
-                    </motion.div>
-                    <motion.div
-                      initial="hidden"
-                      whileInView="visible"
-                      variants={iconAnimation}
-                      className="flex items-center mr-4 mb-2"
-                    >
-                      <FaMapMarkerAlt className="mr-2 text-primary" />
-                      <span>{exp.location}</span>
-                    </motion.div>
-                    <motion.div
-                      initial="hidden"
-                      whileInView="visible"
-                      variants={iconAnimation}
-                      className="flex items-center mb-2"
-                    >
-                      <FaClock className="mr-2 text-primary" />
-                      <span>{calculateDuration(exp.startDate, exp.endDate || new Date())}</span>
-                    </motion.div>
-                  </div>
-                  <ul className="space-y-2 mb-4">
-                    {exp.responsibilities.map((resp, respIndex) => (
-                      <motion.li
-                        key={respIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: (index + respIndex) * 0.1 }}
-                        className="flex items-start"
-                      >
-                        <span className="mr-2 mt-1 text-primary">•</span>
-                        {resp}
-                      </motion.li>
-                    ))}
-                  </ul>
-                  {exp.techStack.length > 0 && (
-                    <div>
-                      <h4 className="text-lg font-semibold text-primary">Technologies:</h4>
-                      <div className="flex flex-wrap space-x-4">
-                        {exp.techStack.map((tech, techIndex) => {
-                          const TechIcon = iconMap[tech] || GiTechnoHeart
-                          return (
-                            <motion.div
-                              key={techIndex}
-                              initial="hidden"
-                              whileInView="visible"
-                              variants={iconAnimation}
-                              className="flex items-center justify-center text-2xl text-primary"
+                      <CardContent className="pt-6">
+                        <div className="flex flex-wrap items-center mb-4 text-sm text-muted-foreground">
+                          <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={iconAnimation}
+                            className="flex items-center mr-4 mb-2"
+                          >
+                            <FaCalendarAlt className="mr-2" color="#ff6347" />
+                            <span>
+                              {exp.startDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} - {' '}
+                              {exp.endDate ? exp.endDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : `Present (${currentYear})`}
+                            </span>
+                          </motion.div>
+                          <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={iconAnimation}
+                            className="flex items-center mr-4 mb-2"
+                          >
+                            <FaMapMarkerAlt className="mr-2" color="#ff6347" />
+                            <span>{exp.location}</span>
+                          </motion.div>
+                          <motion.div
+                            initial="hidden"
+                            whileInView="visible"
+                            variants={iconAnimation}
+                            className="flex items-center mb-2"
+                          >
+                            <FaClock className="mr-2" color="#ff6347" />
+                            <span>{calculateDuration(exp.startDate, exp.endDate || new Date())}</span>
+                          </motion.div>
+                        </div>
+                        <ul className="space-y-2 mb-4">
+                          {exp.responsibilities.map((resp, respIndex) => (
+                            <motion.li
+                              key={respIndex}
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.5, delay: respIndex * 0.1 }}
+                              className="flex items-start"
                             >
-                              <TechIcon className="text-secondary" />
-                              {tech}
-                            </motion.div>
-                          )
-                        })}
-                      </div>
-                    </div>
+                              <span className="mr-2 mt-1" style={{ color: '#ff6347' }}>•</span>
+                              {resp}
+                            </motion.li>
+                          ))}
+                        </ul>
+                        {exp.techStack.length > 0 && (
+                          <div>
+                            <h4 className="text-lg font-semibold" style={{ color: '#ff6347' }}>Technologies:</h4>
+                            <div className="flex flex-wrap gap-4">
+                              {exp.techStack.map((tech, techIndex) => {
+                                const TechIcon = iconMap[tech] || GiTechnoHeart
+                                return (
+                                  <motion.div
+                                    key={techIndex}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    variants={iconAnimation}
+                                    className="flex items-center justify-center text-2xl"
+                                  >
+                                    <TechIcon className="mr-2" color="#ff6347" />
+                                    {tech}
+                                  </motion.div>
+                                )
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </CardContent>
+                    </motion.div>
                   )}
-                </CardContent>
+                </AnimatePresence>
               </Card>
             </motion.div>
           ))}
-        </div>
+        </AnimatePresence>
       </div>
     </section>
   )
