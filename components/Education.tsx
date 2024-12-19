@@ -99,6 +99,13 @@ const educationData: SectionData[] = [
   },
 ]
 
+// Sort education items by year in ascending order
+educationData[0].items.sort((a, b) => {
+  const yearA = new Date(a.year.split(' - ')[0]).getTime();
+  const yearB = new Date(b.year.split(' - ')[0]).getTime();
+  return yearA - yearB;
+});
+
 export default function Education() {
   return (
     <section id="education" className="py-20 bg-gradient-to-b from-background to-secondary/20">
@@ -124,7 +131,7 @@ export default function Education() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="education">
-            <EducationTimeline items={educationData[0].items} />
+            <EducationGrid items={educationData[0].items} />
           </TabsContent>
           <TabsContent value="certifications">
             <CertificationsGrid items={educationData[1].items} />
@@ -135,59 +142,54 @@ export default function Education() {
   )
 }
 
-function EducationTimeline({ items }: { items: EducationItemData[] }) {
+function EducationGrid({ items }: { items: EducationItemData[] }) {
   return (
-    <div className="space-y-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {items.map((item, index) => (
-        <EducationItem key={index} item={item} index={index} />
+        <EducationCard key={index} item={item} index={index} />
       ))}
     </div>
   )
 }
 
-function EducationItem({ item, index }: { item: EducationItemData; index: number }) {
+function EducationCard({ item, index }: { item: EducationItemData; index: number }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <motion.div
-      className="flex items-start"
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
     >
-      <div className="flex-shrink-0 mr-4">
-        <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full" />
-      </div>
-      <div className="flex-grow">
-        <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
-        <p className="text-sm text-muted-foreground mb-1">{item.institution}</p>
-        <p className="text-sm text-muted-foreground mb-2">{item.year}</p>
-        {item.details && <p className="text-sm mb-2">{item.details}</p>}
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button variant="link" className="p-0 h-auto">
-              View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>{item.title}</DialogTitle>
-            </DialogHeader>
-            <div className="mt-4">
-              <Image src={item.logo} alt={`${item.institution} logo`} width={80} height={80} className="rounded-full mb-4 mx-auto" />
-              <p className="text-center mb-1">{item.institution}</p>
-              <p className="text-center text-sm text-muted-foreground mb-4">{item.year}</p>
-              <div className="flex justify-center">
-                <Button asChild variant="default">
-                  <a href={item.certificateLink} target="_blank" rel="noopener noreferrer">
-                    View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
-                  </a>
-                </Button>
-              </div>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300">
+            <CardContent className="p-4 flex flex-col items-center justify-center h-full">
+              <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
+              <h3 className="font-semibold text-center text-sm">{item.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{item.year}</p>
+            </CardContent>
+          </Card>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{item.title}</DialogTitle>
+          </DialogHeader>
+          <div className="mt-4">
+            <Image src={item.logo} alt={`${item.institution} logo`} width={80} height={80} className="rounded-full mb-4 mx-auto" />
+            <p className="text-center mb-1">{item.institution}</p>
+            <p className="mt-2 text-sm text-muted-foreground">{item.year}</p>
+            {item.details && <p className="text-sm mb-2">{item.details}</p>}
+            <div className="flex justify-center">
+              <Button asChild variant="default">
+                <a href={item.certificateLink} target="_blank" rel="noopener noreferrer">
+                  View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
+                </a>
+              </Button>
             </div>
-          </DialogContent>
-        </Dialog>
-      </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   )
 }
