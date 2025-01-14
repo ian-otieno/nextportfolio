@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <div className="flex flex-col min-h-screen">
-            <Header />
+            {/* <Header /> */}
             <div className="flex flex-1 pt-16">
               <Sidebar />
               <main className="flex-1 ml-0 md:ml-64 p-4">
