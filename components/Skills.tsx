@@ -142,13 +142,13 @@ export default function SkillsShowcase() {
   const skillCategories = activeTab === 'fintech' ? fintechSkills : moringaSkills
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
+    <section className="py-20 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200"
         >
           My Skills
         </motion.h2>
@@ -157,13 +157,13 @@ export default function SkillsShowcase() {
             onClick={() => setActiveTab('fintech')}
             className={`px-4 py-2 mx-2 ${activeTab === 'fintech' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'}`}
           >
-            Fintech-Group Kenya Ltd
+            Fintech
           </button>
           <button
             onClick={() => setActiveTab('moringa')}
             className={`px-4 py-2 mx-2 ${activeTab === 'moringa' ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'}`}
           >
-            Moringa School-BootCamp
+            Moringa School
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -180,7 +180,7 @@ export default function SkillsShowcase() {
                     <category.icon className="mr-3 h-8 w-8 text-primary" aria-hidden="true" />
                     {category.name}
                   </CardTitle>
-                  <p className="mt-2 text-gray-600">{category.description}</p>
+                  <p className="mt-2 text-gray-600 dark:text-gray-300">{category.description}</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="grid grid-cols-2 gap-4">

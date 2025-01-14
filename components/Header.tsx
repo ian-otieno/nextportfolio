@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Add this line at the top to mark the component as a client component
 
 import { motion } from 'framer-motion';
 import { MoonIcon, SunIcon } from 'lucide-react';
@@ -6,7 +6,8 @@ import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Menu } from 'lucide-react';
 
 interface Messages {
   navigation: {
@@ -23,10 +24,10 @@ interface Messages {
 
 interface HeaderProps {
   messages?: Messages;
+  toggleSidebar: () => void;
 }
 
-
-export default function Header({ messages }: HeaderProps) {
+export default function Header({ messages, toggleSidebar }: HeaderProps) {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
@@ -64,19 +65,32 @@ export default function Header({ messages }: HeaderProps) {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="fixed w-full bg-background/80 backdrop-blur-sm z-50 h-16"
+      className="fixed w-full bg-gray-100/80 dark:bg-gray-800/80 backdrop-blur-sm z-50 h-16"
     >
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+        {/* Mobile Menu Button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
+          onClick={toggleSidebar}
+          aria-label="Toggle sidebar"
+        >
+          <Menu className="h-6 w-6" />
+        </Button>
+
+        {/* Logo */}
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="text-2xl font-bold"
+          className="text-2xl font-bold text-gray-900 dark:text-white"
         >
-          <Link href="/">{messages?.navigation?.home || 'Home'}</Link>
+          <Link href="/">{messages?.navigation?.home || ''}</Link>
         </motion.h1>
+
+        {/* Theme Toggle Button */}
         <div className="flex items-center space-x-4">
-         
           <Button
             variant="ghost"
             size="icon"

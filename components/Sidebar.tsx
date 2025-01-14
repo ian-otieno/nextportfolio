@@ -37,11 +37,13 @@ export default function Sidebar() {
 
   return (
     <>
+      {/* Hamburger button for mobile */}
       <Button
         variant="ghost"
         size="icon"
         className="fixed top-4 left-4 z-50 md:hidden"
         onClick={toggleSidebar}
+        aria-label={isOpen ? 'Close sidebar' : 'Open sidebar'}
       >
         {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
       </Button>
@@ -61,14 +63,14 @@ export default function Sidebar() {
                 const path = `/${item.key}`;
                 const isActive = pathname === path;
                 const Icon = item.icon;
-                
+
                 return (
                   <motion.div
                     key={item.key}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => setIsOpen(false)}  // Close sidebar on item click
                   >
                     <Link
                       href={path}

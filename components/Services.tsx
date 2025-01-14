@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,13 +20,13 @@ const services = [
 // Services Component
 const Services = () => {
   return (
-    <section id="services" className="py-20 bg-secondary">
+    <section id="services" className="py-20 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl font-bold text-center mb-12"
+          className="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200"
         >
           Services
         </motion.h2>

@@ -1,32 +1,32 @@
-"use client"
+"use client"; // Marking the component as a Client Component
 
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { FaCode, FaHiking, FaBook, FaGamepad, FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { FaCode, FaHiking, FaBook, FaGamepad, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const hobbies = [
-  { name: 'Coding', icon: <FaCode className="text-blue-500 text-3xl" />, description: 'I do coding to solve problems and create innovative solutions.' },
-  { name: 'Hiking', icon: <FaHiking className="text-green-500 text-3xl" />, description: 'Exploring nature helps me relax and recharge.' },
-  { name: 'Reading', icon: <FaBook className="text-purple-500 text-3xl" />, description: 'I enjoy both fiction and non-fiction, always looking to learn more.' },
-  { name: 'Gaming', icon: <FaGamepad className="text-red-500 text-3xl" />, description: 'I enjoy strategy games that challenge my thinking and teamwork.' },
-]
+  { name: 'Coding', icon: <FaCode className="text-blue-500 text-4xl" />, description: 'I do coding to solve problems and create innovative solutions.' },
+  { name: 'Hiking', icon: <FaHiking className="text-green-500 text-4xl" />, description: 'Exploring nature helps me relax and recharge.' },
+  { name: 'Reading', icon: <FaBook className="text-purple-500 text-4xl" />, description: 'I enjoy both fiction and non-fiction, always looking to learn more.' },
+  { name: 'Gaming', icon: <FaGamepad className="text-red-500 text-4xl" />, description: 'I enjoy strategy games that challenge my thinking and teamwork.' },
+];
 
 export default function About() {
-  const [expandedHobby, setExpandedHobby] = useState<number | null>(null)
-  const [showFullBio, setShowFullBio] = useState(false)
-  const profileImage = "/images/IMG_20190703_182313-removebg-preview.png"
+  const [expandedHobby, setExpandedHobby] = useState<number | null>(null);
+  const [showFullBio, setShowFullBio] = useState(false);
+  const profileImage = "/images/IMG_20190703_182313-removebg-preview.png";
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-b from-background to-secondary/20">
+    <section id="about" className="pt-10 pb-20 bg-gradient-to-b from-gray-100 to-gray-300 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-5xl font-bold text-center mb-6 text-gray-800 dark:text-gray-200"
         >
           About Me
         </motion.h2>
@@ -56,9 +56,9 @@ export default function About() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="w-full lg:w-2/3"
           >
-            <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 h-full bg-card/50 backdrop-blur-sm">
+            <Card className="p-6 shadow-md hover:shadow-lg transition-shadow duration-300 h-full bg-white dark:bg-gray-700 rounded-lg">
               <CardHeader>
-                <CardTitle className="text-2xl mb-4">About Me</CardTitle>
+                <CardTitle className="text-2xl mb-4 text-gray-800 dark:text-gray-200">About Me</CardTitle>
               </CardHeader>
               <CardContent>
                 <AnimatePresence mode="wait">
@@ -69,15 +69,15 @@ export default function About() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <p className="text-lg mb-4">
+                    <p className="text-lg mb-4 text-gray-800 dark:text-gray-200">
                       I am a dedicated and passionate Software Developer with a Bachelor of Science in Public Administration and Leadership from Jomo Kenyatta University of Agriculture and Technology (JKUAT), complemented by a Full Stack Development certification from Moringa School.
                     </p>
                     {showFullBio && (
                       <>
-                        <p className="text-lg mb-4">
+                        <p className="text-lg mb-4 text-gray-800 dark:text-gray-200">
                           I possess expertise in both frontend and backend development, with hands-on experience in modern web technologies including JavaScript, React, Python, Flask, Django, and PostgreSQL.
                         </p>
-                        <p className="text-lg mb-4">
+                        <p className="text-lg mb-4 text-gray-800 dark:text-gray-200">
                           In addition to my expertise in web application development, I bring valuable skills in Microsoft SQL, Azure DevOps, VB.Net, ASP.NET Core, and C#, allowing me to build robust and scalable solutions. I am always eager to tackle challenging projects, collaborate with cross-functional teams, and continuously expand my technical knowledge to drive innovation and professional growth.
                         </p>
                       </>
@@ -87,7 +87,7 @@ export default function About() {
                 <Button
                   onClick={() => setShowFullBio(!showFullBio)}
                   variant="ghost"
-                  className="mt-2 flex items-center"
+                  className="mt-2 flex items-center text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100"
                 >
                   {showFullBio ? (
                     <>
@@ -108,12 +108,12 @@ export default function About() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-3xl font-bold text-center mb-8"
+          className="text-4xl font-bold text-center mb-8 text-gray-800 dark:text-gray-200"
         >
           Hobbies
         </motion.h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {hobbies.map((hobby, index) => (
             <motion.div
               key={index}
@@ -122,14 +122,14 @@ export default function About() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card
-                className="h-full hover:shadow-lg transition-all duration-300 p-4 cursor-pointer bg-card/50 backdrop-blur-sm"
+                className="h-full hover:shadow-lg transition-all duration-300 p-4 cursor-pointer bg-white dark:bg-gray-700 rounded-lg"
                 onClick={() => setExpandedHobby(expandedHobby === index ? null : index)}
               >
                 <div className="flex items-center space-x-4">
                   <div>{hobby.icon}</div>
                   <div className="flex-grow">
                     <CardHeader className="p-0">
-                      <CardTitle className="text-xl">{hobby.name}</CardTitle>
+                      <CardTitle className="text-xl text-gray-800 dark:text-gray-200">{hobby.name}</CardTitle>
                     </CardHeader>
                     <CardContent className="p-0 mt-2">
                       <AnimatePresence>
@@ -139,7 +139,7 @@ export default function About() {
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="text-sm"
+                            className="text-sm text-gray-600 dark:text-gray-400"
                           >
                             {hobby.description}
                           </motion.p>
@@ -157,5 +157,5 @@ export default function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }

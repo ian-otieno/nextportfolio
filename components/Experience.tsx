@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -127,13 +127,13 @@ export default function CareerTimeline() {
     : experiences
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-secondary/20">
+    <section className="py-20 bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200"
         >
           Professional Experience
         </motion.h2>
@@ -232,33 +232,27 @@ export default function CareerTimeline() {
                               transition={{ duration: 0.5, delay: respIndex * 0.1 }}
                               className="flex items-start"
                             >
-                              <span className="mr-2 mt-1" style={{ color: '#ff6347' }}>•</span>
+                              <GiTechnoHeart className="mr-2 mt-1 h-5 w-5 text-primary-foreground" />
                               {resp}
                             </motion.li>
                           ))}
                         </ul>
-                        {exp.techStack.length > 0 && (
-                          <div>
-                            <h4 className="text-lg font-semibold" style={{ color: '#ff6347' }}>Technologies:</h4>
-                            <div className="flex flex-wrap gap-4">
-                              {exp.techStack.map((tech, techIndex) => {
-                                const TechIcon = iconMap[tech] || GiTechnoHeart
-                                return (
-                                  <motion.div
-                                    key={techIndex}
-                                    initial="hidden"
-                                    whileInView="visible"
-                                    variants={iconAnimation}
-                                    className="flex items-center justify-center text-2xl"
-                                  >
-                                    <TechIcon className="mr-2" color="#ff6347" />
-                                    {tech}
-                                  </motion.div>
-                                )
-                              })}
-                            </div>
-                          </div>
-                        )}
+                        <div className="flex flex-wrap gap-4">
+                          {exp.techStack.map((tech, techIndex) => {
+                            const Icon = iconMap[tech]
+                            return Icon ? (
+                              <motion.div
+                                key={techIndex}
+                                initial="hidden"
+                                whileInView="visible"
+                                variants={iconAnimation}
+                                className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 text-gray-700"
+                              >
+                                <Icon size={24} />
+                              </motion.div>
+                            ) : null
+                          })}
+                        </div>
                       </CardContent>
                     </motion.div>
                   )}

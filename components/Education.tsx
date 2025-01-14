@@ -61,7 +61,7 @@ const educationData: SectionData[] = [
     icon: AwardIcon,
     items: [
       {
-        title: 'Introduction to programming',
+        title: 'Introduction to Programming',
         institution: 'Moringa School',
         year: '2022',
         logo: '/images/ZzZgytR8_400x400.png',
@@ -69,28 +69,28 @@ const educationData: SectionData[] = [
       },
       {
         title: 'JavaScript',
-        institution: 'Linkedin-Learning',
+        institution: 'LinkedIn Learning',
         year: '2023',
         logo: '/images/Linkedin-Learning-Web.png',
         certificateLink: 'https://lnkd.in/dfVE3MNf',
       },
       {
         title: 'Azure DevOps',
-        institution: 'Linkedin-Learning',
+        institution: 'LinkedIn Learning',
         year: '2023',
         logo: '/images/Linkedin-Learning-Web.png',
         certificateLink: 'https://lnkd.in/dmbu2Xgg',
       },
       {
         title: 'Microsoft SQL Server 2022',
-        institution: 'Linkedin-Learning',
+        institution: 'LinkedIn Learning',
         year: '2023',
         logo: '/images/Linkedin-Learning-Web.png',
         certificateLink: 'https://lnkd.in/dw68Am4C',
       },
       {
-        title: 'Oracle database',
-        institution: 'Linkedin-Learning',
+        title: 'Oracle Database',
+        institution: 'LinkedIn Learning',
         year: '2022',
         logo: '/images/Linkedin-Learning-Web.png',
         certificateLink: 'https://lnkd.in/dp8EWjSt',
@@ -108,24 +108,24 @@ educationData[0].items.sort((a, b) => {
 
 export default function Education() {
   return (
-    <section id="education" className="py-20 bg-gradient-to-b from-background to-secondary/20">
+    <section id="education" className="py-20 bg-gray-100 dark:bg-gray-800">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl font-bold text-center mb-12"
+          className="text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200"
         >
           Education & Certifications
         </motion.h2>
 
         <Tabs defaultValue="education" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="education" className="text-lg">
+            <TabsTrigger value="education" className="text-lg text-gray-800 dark:text-gray-200">
               <GraduationCapIcon className="mr-2 h-5 w-5" />
               Education
             </TabsTrigger>
-            <TabsTrigger value="certifications" className="text-lg">
+            <TabsTrigger value="certifications" className="text-lg text-gray-800 dark:text-gray-200">
               <AwardIcon className="mr-2 h-5 w-5" />
               Certifications
             </TabsTrigger>
@@ -144,7 +144,7 @@ export default function Education() {
 
 function EducationGrid({ items }: { items: EducationItemData[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {items.map((item, index) => (
         <EducationCard key={index} item={item} index={index} />
       ))}
@@ -157,30 +157,30 @@ function EducationCard({ item, index }: { item: EducationItemData; index: number
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
     >
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300">
+          <Card className="cursor-pointer hover:shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-shadow duration-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg">
             <CardContent className="p-4 flex flex-col items-center justify-center h-full">
               <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
-              <h3 className="font-semibold text-center text-sm">{item.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{item.year}</p>
+              <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>
             </CardContent>
           </Card>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="p-6 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
           <DialogHeader>
-            <DialogTitle>{item.title}</DialogTitle>
+            <DialogTitle className="text-lg font-bold">{item.title}</DialogTitle>
           </DialogHeader>
           <div className="mt-4">
             <Image src={item.logo} alt={`${item.institution} logo`} width={80} height={80} className="rounded-full mb-4 mx-auto" />
-            <p className="text-center mb-1">{item.institution}</p>
-            <p className="mt-2 text-sm text-muted-foreground">{item.year}</p>
-            {item.details && <p className="text-sm mb-2">{item.details}</p>}
-            <div className="flex justify-center">
+            <p className="text-center mb-1 font-medium">{item.institution}</p>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{item.year}</p>
+            {item.details && <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">{item.details}</p>}
+            <div className="flex justify-center mt-4">
               <Button asChild variant="default">
                 <a href={item.certificateLink} target="_blank" rel="noopener noreferrer">
                   View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
@@ -196,7 +196,7 @@ function EducationCard({ item, index }: { item: EducationItemData; index: number
 
 function CertificationsGrid({ items }: { items: EducationItemData[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {items.map((item, index) => (
         <CertificationCard key={index} item={item} index={index} />
       ))}
@@ -209,31 +209,29 @@ function CertificationCard({ item, index }: { item: EducationItemData; index: nu
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
     >
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow duration-300">
+          <Card className="cursor-pointer hover:shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-shadow duration-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg">
             <CardContent className="p-4 flex flex-col items-center justify-center h-full">
               <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
-              <h3 className="font-semibold text-center text-sm">{item.title}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{item.year}</p>
+              <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>
             </CardContent>
           </Card>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="p-6 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
           <DialogHeader>
-            <DialogTitle>{item.title}</DialogTitle>
+            <DialogTitle className="text-lg font-bold">{item.title}</DialogTitle>
           </DialogHeader>
           <div className="mt-4">
             <Image src={item.logo} alt={`${item.institution} logo`} width={80} height={80} className="rounded-full mb-4 mx-auto" />
-            <p className="text-center mb-1">{item.institution}</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {item.year}
-            </p>
-            <div className="flex justify-center">
+            <p className="text-center mb-1 font-medium">{item.institution}</p>
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{item.year}</p>
+            <div className="flex justify-center mt-4">
               <Button asChild variant="default">
                 <a href={item.certificateLink} target="_blank" rel="noopener noreferrer">
                   View Certificate <ExternalLinkIcon className="ml-1 h-3 w-3" />
