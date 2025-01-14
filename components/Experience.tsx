@@ -51,7 +51,7 @@ const experiences = [
     title: 'Software Developer Trainee',
     company: 'Fintech Group Kenya',
     startDate: new Date(2023, 2), // March 2023
-    endDate: new Date(2023, 7), // August 2023
+    endDate: new Date(2023, 8), // August 2023
     location: 'Nairobi, Kenya',
     responsibilities: [
       'Developed Finmetrics web application monitoring system using ASP.NET Core Web APIs.',
