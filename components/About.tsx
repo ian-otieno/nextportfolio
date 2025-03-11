@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Progress } from "@/components/ui/progress"
 
-import { FaCode, FaServer, FaCogs, FaGitAlt, FaReact, FaPython, FaJs, FaMicrochip,FaDatabase } from "react-icons/fa"
+import { FaCode, FaServer, FaCogs, FaGitAlt, FaReact, FaPython, FaJs, FaMicrochip, FaDatabase } from "react-icons/fa"
 import { GiBrain, GiMountainCave, GiBookCover, GiGamepad } from "react-icons/gi"
 import { MdPeople, MdMessage, MdHandshake, MdAccessTime, MdLightbulb, MdPresentToAll } from "react-icons/md"
 import { AiFillHeart } from "react-icons/ai"
@@ -34,7 +34,6 @@ const hobbies = [
     icon: <GiBookCover className="h-6 w-6 text-red-500" />,
     description: "I enjoy both fiction and non-fiction, always looking to learn more.",
   },
-  
 ]
 
 // Enhanced technical skills with vibrant icons, proficiency levels, and detailed descriptions
@@ -188,7 +187,6 @@ const softSkills = [
     icon: <MdPresentToAll className="h-6 w-6 text-blue-500" />,
     description: "Focused on achieving objectives and delivering high-quality results.",
   },
-  
 ]
 
 // Skill categories for filtering
@@ -211,6 +209,7 @@ export default function About() {
   const [skillFilter, setSkillFilter] = useState("all")
   const [searchQuery, setSearchQuery] = useState("")
   const [isGridView, setIsGridView] = useState(true)
+  const [viewMore, setViewMore] = useState(false)
 
   const skillsRef = useRef(null)
   const isSkillsInView = useInView(skillsRef, { once: false, amount: 0.2 })
@@ -265,42 +264,52 @@ export default function About() {
         <div className="grid grid-cols-1 gap-10 mb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <Tabs defaultValue="technical" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-8">
+              <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-8">
                 <TabsTrigger value="story">My Story</TabsTrigger>
                 <TabsTrigger value="technical">Technical Skills</TabsTrigger>
                 <TabsTrigger value="soft">Soft Skills</TabsTrigger>
                 <TabsTrigger value="hobbies">Hobbies</TabsTrigger>
               </TabsList>
               <TabsContent value="story" className="mt-0">
-  <Card className="border-primary/20">
-    <CardHeader>
-      <CardTitle className="flex items-center gap-2">
-        <AiFillHeart className="h-5 w-5 text-red-500" />
-        My Story
-      </CardTitle>
-      <CardDescription>
-        Journeying through technology and innovation
-      </CardDescription>
-    </CardHeader>
-    <CardContent className="text-muted-foreground space-y-4">
-      <p>
-        My professional journey began with a Bachelor of Science in Public Administration and Leadership, where I developed skills in governance, analytical thinking, and effective teamwork. During my tenure as an attaché at the Ministry of Devolution and ASAL Areas, I witnessed firsthand how technology could revolutionize processes.
-      </p>
-      <p>
-        This realization ignited my passion for innovation and problem-solving, prompting a transition into software development. To gain the necessary technical skills, I enrolled in a Professional Certificate program in Software Engineering at Moringa School. There, I became proficient in full-stack development, mastering languages and frameworks such as Python, Django, Flask, React, and SQL.
-      </p>
-      <p>
-        Over the past three years at Fintech Group Kenya, I've leveraged these skills to enhance core banking systems, develop SACCO loan management tools, and create fintech leasing platforms across various countries. My contributions have significantly reduced system inefficiencies and improved client satisfaction for organizations like NCBA Bank Kenya and Centenary Bank Uganda.
-      </p>
-      <p>
-        Currently, I specialize in building scalable, high-performance applications using a tech stack that includes C#, ASP.NET Core, Microsoft SQL, React, and Azure DevOps. I thrive in collaborative, Agile environments, leveraging my leadership background to drive projects, tackle complex challenges, and foster innovative solutions.
-      </p>
-      <p>
-        My story embodies a continuous quest for growth, merging analytical insight with technical prowess to deliver impactful systems in fintech and beyond. I invite you to connect with me to explore how we can innovate together!
-      </p>
-    </CardContent>
-  </Card>
-</TabsContent>
+                <Card className="border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <AiFillHeart className="h-5 w-5 text-red-500" />
+                      My Story
+                    </CardTitle>
+                    <CardDescription>
+                      Journeying through technology and innovation
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-muted-foreground space-y-4">
+                    <p>
+                      My professional journey began with a Bachelor of Science in Public Administration and Leadership, where I developed skills in governance, analytical thinking, and effective teamwork. During my tenure as an attaché at the Ministry of Devolution and ASAL Areas, I witnessed firsthand how technology could revolutionize processes.
+                    </p>
+                    <p>
+                      This realization ignited my passion for innovation and problem-solving, prompting a transition into software development. To gain the necessary technical skills, I enrolled in a Professional Certificate program in Software Engineering at Moringa School. There, I became proficient in full-stack development, mastering languages and frameworks such as Python, Django, Flask, React, and SQL.
+                    </p>
+                    {viewMore && (
+                      <>
+                        <p>
+                          Over the past three years at Fintech Group Kenya, I've leveraged these skills to enhance core banking systems, develop SACCO loan management tools, and create fintech leasing platforms across various countries. My contributions have significantly reduced system inefficiencies and improved client satisfaction for organizations like NCBA Bank Kenya and Centenary Bank Uganda.
+                        </p>
+                        <p>
+                          Currently, I specialize in building scalable, high-performance applications using a tech stack that includes C#, ASP.NET Core, Microsoft SQL, React, and Azure DevOps. I thrive in collaborative, Agile environments, leveraging my leadership background to drive projects, tackle complex challenges, and foster innovative solutions.
+                        </p>
+                        <p>
+                          My story embodies a continuous quest for growth, merging analytical insight with technical prowess to deliver impactful systems in fintech and beyond. I invite you to connect with me to explore how we can innovate together!
+                        </p>
+                      </>
+                    )}
+                    <Button
+                      variant="link"
+                      onClick={() => setViewMore(!viewMore)}
+                    >
+                      {viewMore ? "View Less" : "View More"}
+                    </Button>
+                  </CardContent>
+                </Card>
+              </TabsContent>
 
               <TabsContent value="technical" className="mt-0">
                 <Card className="border-primary/20">
@@ -442,17 +451,16 @@ export default function About() {
                                   </div>
                                 </CardHeader>
                                 <CardContent className="space-y-3">
-                                <div>
-  <div className="flex justify-between mb-1 text-sm">
-    <span>Proficiency</span>
-    <span className="font-medium">{skill.proficiency}%</span>
-  </div>
-  <Progress
-    value={skill.proficiency}
-    className={`h-2 bg-${skill.color}-100 dark:bg-${skill.color}-900/20`}
-  />
-</div>
-
+                                  <div>
+                                    <div className="flex justify-between mb-1 text-sm">
+                                      <span>Proficiency</span>
+                                      <span className="font-medium">{skill.proficiency}%</span>
+                                    </div>
+                                    <Progress
+                                      value={skill.proficiency}
+                                      className={`h-2 bg-${skill.color}-100 dark:bg-${skill.color}-900/20`}
+                                    />
+                                  </div>
                                   <p className="text-muted-foreground text-sm">{skill.description}</p>
                                 </CardContent>
                               </Card>
@@ -504,16 +512,15 @@ export default function About() {
                                         </Badge>
                                       </div>
                                       <div>
-  <div className="flex justify-between mb-1 text-sm">
-    <span>Proficiency</span>
-    <span className="font-medium">{skill.proficiency}%</span>
-  </div>
-  <Progress
-    value={skill.proficiency}
-    className={`h-2 bg-${skill.color}-100 dark:bg-${skill.color}-900/20`}
-  />
-</div>
-
+                                        <div className="flex justify-between mb-1 text-sm">
+                                          <span>Proficiency</span>
+                                          <span className="font-medium">{skill.proficiency}%</span>
+                                        </div>
+                                        <Progress
+                                          value={skill.proficiency}
+                                          className={`h-2 bg-${skill.color}-100 dark:bg-${skill.color}-900/20`}
+                                        />
+                                      </div>
                                     </div>
                                     <p className="text-muted-foreground">{skill.description}</p>
                                   </div>
@@ -524,62 +531,6 @@ export default function About() {
                         </motion.div>
                       )}
                     </div>
-
-                    {/* Skill summary */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.7, delay: 0.3 }}
-                      className="mt-8"
-                    >
-                      <Card className="bg-primary/5 border-primary/20">
-                        <CardContent className="pt-6">
-                          <div className="flex items-center justify-center mb-4">
-                            <motion.div
-                              animate={{
-                                scale: [1, 1.1, 1],
-                                rotate: [0, 5, 0, -5, 0],
-                              }}
-                              transition={{
-                                repeat: Number.POSITIVE_INFINITY,
-                                duration: 3,
-                                ease: "easeInOut",
-                              }}
-                            >
-                              <FaCode className="h-8 w-8 text-primary mr-2" />
-                            </motion.div>
-                            <h3 className="text-2xl font-semibold">Technical Expertise</h3>
-                          </div>
-                          <p className="text-muted-foreground text-center max-w-3xl mx-auto">
-                            My technical journey spans full-stack development with a focus on .NET ecosystem and modern
-                            web technologies. I'm passionate about clean code, performance optimization, and creating
-                            scalable solutions that solve real-world problems.
-                          </p>
-
-                          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mt-6">
-                            {skillCategories
-                              .filter((c) => c.value !== "all")
-                              .map((category) => {
-                                const count = technicalSkills.filter((s) => s.category === category.value).length
-                                return count > 0 ? (
-                                  <Button
-                                    key={category.value}
-                                    variant="outline"
-                                    size="sm"
-                                    className={`justify-between ${skillFilter === category.value ? "bg-primary/10 border-primary/30" : ""}`}
-                                    onClick={() => setSkillFilter(category.value)}
-                                  >
-                                    {category.label}
-                                    <Badge variant="secondary" className="ml-2">
-                                      {count}
-                                    </Badge>
-                                  </Button>
-                                ) : null
-                              })}
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </motion.div>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -782,4 +733,3 @@ export default function About() {
     </section>
   )
 }
-

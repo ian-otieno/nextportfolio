@@ -214,11 +214,11 @@ function EducationItem({ item, index }: { item: EducationItemData; index: number
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="flex flex-col mx-auto bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg p-4 h-48" // Uniform size
+      className="flex flex-col items-center justify-center h-full cursor-pointer"
     >
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <div className="cursor-pointer flex flex-col items-center justify-center h-full">
+          <div className="flex flex-col items-center justify-center">
             <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
             <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>
@@ -255,11 +255,11 @@ function CertificationItem({ item, index }: { item: EducationItemData; index: nu
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="flex flex-col mx-auto bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg p-4 h-48" // Uniform size
+      className="flex flex-col items-center justify-center h-full cursor-pointer"
     >
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <div className="cursor-pointer flex flex-col items-center justify-center h-full">
+          <div className="flex flex-col items-center justify-center">
             <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
             <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>

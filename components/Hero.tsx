@@ -11,10 +11,10 @@ import {
 } from "lucide-react";
 import {
   FaReact, FaFlask, FaGithub, FaLinkedin, FaTwitter, FaEnvelope,
-  FaDatabase
+  FaDatabase, FaPython, FaJs
 } from "react-icons/fa";
 import {
-  SiDjango, SiNextdotjs, SiPostgresql, SiDotnet
+  SiDjango, SiNextdotjs, SiPostgresql, SiDotnet, SiSharp
 } from "react-icons/si";
 
 const carouselMessages = [
@@ -34,6 +34,9 @@ const technologies = [
   { name: "Next.js", icon: <SiNextdotjs className="text-black dark:text-white" size={28} /> },
   { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-600 dark:text-blue-400" size={28} /> },
   { name: "Microsoft SQL", icon: <FaDatabase className="text-red-600 dark:text-red-400" size={28} /> },
+  { name: "Python", icon: <FaPython className="text-blue-600 dark:text-blue-400" size={28} /> },
+  { name: "C#", icon: <SiSharp className="text-purple-600 dark:text-purple-400" size={28} /> },
+  { name: "JavaScript", icon: <FaJs className="text-yellow-500 dark:text-yellow-400" size={28} /> },
 ];
 
 export default function Home() {
@@ -41,6 +44,7 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTechIndex, setActiveTechIndex] = useState(0);
+  const [isResumeVisible, setIsResumeVisible] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -75,6 +79,10 @@ export default function Home() {
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
+  };
+
+  const toggleResumeVisibility = () => {
+    setIsResumeVisible(!isResumeVisible);
   };
 
   return (
@@ -194,58 +202,59 @@ export default function Home() {
             </motion.div>
 
             <motion.div
-              className="flex flex-wrap mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col items-center cursor-pointer group mb-8"
+              onClick={toggleResumeVisibility}
             >
-              <Button
-                variant="outline"
-                asChild
-                className="group border-gray-300 dark:border-gray-600 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100 shadow-md hover:shadow-lg transition-all duration-300 backdrop-blur-sm px-8 py-3 text-lg pointer-animation"
-                size="lg"
+              <a
+                href={isResumeVisible ? "https://drive.google.com/file/d/1yk3DTLshEEKpgIftjHFBK0TtvhCCPdKn/view?usp=sharing" : "#"}
+                target={isResumeVisible ? "_blank" : "_self"}
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
               >
-                <a
-                  href="https://drive.google.com/file/d/1yk3DTLshEEKpgIftjHFBK0TtvhCCPdKn/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <Download className="h-6 w-6 text-blue-500 group-hover:animate-pulse" />
-                  <span>Download Resume</span>
-                </a>
-              </Button>
+                <Download className="h-6 w-6 text-blue-500 group-hover:animate-pulse" />
+                <span className="text-sm text-gray-600 dark:text-gray-400 mb-2 group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors">
+                  {isResumeVisible ? "Download Resume" : "Show Resume"}
+                </span>
+              </a>
+              <ChevronDown className="h-6 w-6 text-gray-600 dark:text-gray-400 animate-bounce group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors" />
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex items-center gap-4"
+              className="flex items-center gap-4 mb-8"
             >
               <SocialLink href="https://github.com/ian-otieno" icon={<FaGithub className="text-gray-700 dark:text-gray-200" size={22} />} label="GitHub" />
               <SocialLink href="https://linkedin.com/in/ian-owino" icon={<FaLinkedin className="text-blue-500" size={22} />} label="LinkedIn" />
               <SocialLink href="https://twitter.com/IanOtieno97" icon={<FaTwitter className="text-blue-500" size={22} />} label="Twitter" />
               <SocialLink href="mailto:ianowino3@gmail.com" icon={<FaEnvelope className="text-red-500" size={22} />} label="Email" />
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="flex flex-col items-center cursor-pointer group"
+            >
+              <Link href="/about" passHref>
+                <motion.div
+                  className="flex flex-col items-center cursor-pointer group"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span className="text-sm text-gray-600 dark:text-gray-400 mb-2 group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors">
+                    Learn More
+                  </span>
+                  <ChevronDown className="h-6 w-6 text-gray-600 dark:text-gray-400 animate-bounce group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors" />
+                </motion.div>
+              </Link>
+            </motion.div>
           </div>
         </div>
-
-        <Link href="/about" passHref>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center cursor-pointer group"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="text-sm text-gray-600 dark:text-gray-400 mb-2 group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors">
-              Learn More
-            </span>
-            <ChevronDown className="h-6 w-6 text-gray-600 dark:text-gray-400 animate-bounce group-hover:text-yellow-500 dark:group-hover:text-yellow-400 transition-colors" />
-          </motion.div>
-        </Link>
       </section>
 
       <style jsx global>{`
