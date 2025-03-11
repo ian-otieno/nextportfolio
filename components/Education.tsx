@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { GraduationCapIcon, AwardIcon, ExternalLinkIcon } from 'lucide-react'
@@ -99,14 +98,22 @@ const educationData: SectionData[] = [
   },
 ]
 
-// Sort education items by year in ascending order
+// Sort education items by year in descending order
 educationData[0].items.sort((a, b) => {
   const yearA = new Date(a.year.split(' - ')[0]).getTime();
   const yearB = new Date(b.year.split(' - ')[0]).getTime();
-  return yearA - yearB;
+  return yearB - yearA; // Change this to yearB - yearA for descending order
+});
+
+educationData[1].items.sort((a, b) => {
+  const yearA = new Date(a.year).getTime();
+  const yearB = new Date(b.year).getTime();
+  return yearB - yearA; // Change this to yearB - yearA for descending order
 });
 
 export default function Education() {
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+
   return (
     <section id="education" className="py-20 bg-gray-100 dark:bg-gray-800">
       <div className="container mx-auto px-4">
@@ -118,6 +125,15 @@ export default function Education() {
         >
           Education & Certifications
         </motion.h2>
+
+        <div className="flex justify-end mb-4">
+          <Button onClick={() => setViewMode('grid')} variant={viewMode === 'grid' ? 'default' : 'outline'}>
+            Grid View
+          </Button>
+          <Button onClick={() => setViewMode('list')} variant={viewMode === 'list' ? 'default' : 'outline'} className="ml-2">
+            List View
+          </Button>
+        </div>
 
         <Tabs defaultValue="education" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-8">
@@ -131,10 +147,18 @@ export default function Education() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value="education">
-            <EducationGrid items={educationData[0].items} />
+            {viewMode === 'grid' ? (
+              <EducationGrid items={educationData[0].items} />
+            ) : (
+              <EducationList items={educationData[0].items} />
+            )}
           </TabsContent>
           <TabsContent value="certifications">
-            <CertificationsGrid items={educationData[1].items} />
+            {viewMode === 'grid' ? (
+              <CertificationsGrid items={educationData[1].items} />
+            ) : (
+              <CertificationsList items={educationData[1].items} />
+            )}
           </TabsContent>
         </Tabs>
       </div>
@@ -146,13 +170,43 @@ function EducationGrid({ items }: { items: EducationItemData[] }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {items.map((item, index) => (
-        <EducationCard key={index} item={item} index={index} />
+        <EducationItem key={index} item={item} index={index} />
       ))}
     </div>
   )
 }
 
-function EducationCard({ item, index }: { item: EducationItemData; index: number }) {
+function EducationList({ items }: { items: EducationItemData[] }) {
+  return (
+    <div className="flex flex-col space-y-4">
+      {items.map((item, index) => (
+        <EducationItem key={index} item={item} index={index} />
+      ))}
+    </div>
+  )
+}
+
+function CertificationsGrid({ items }: { items: EducationItemData[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {items.map((item, index) => (
+        <CertificationItem key={index} item={item} index={index} />
+      ))}
+    </div>
+  )
+}
+
+function CertificationsList({ items }: { items: EducationItemData[] }) {
+  return (
+    <div className="flex flex-col space-y-4">
+      {items.map((item, index) => (
+        <CertificationItem key={index} item={item} index={index} />
+      ))}
+    </div>
+  )
+}
+
+function EducationItem({ item, index }: { item: EducationItemData; index: number }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -160,16 +214,15 @@ function EducationCard({ item, index }: { item: EducationItemData; index: number
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="flex flex-col mx-auto bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg p-4 h-48" // Uniform size
     >
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Card className="cursor-pointer hover:shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-shadow duration-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg">
-            <CardContent className="p-4 flex flex-col items-center justify-center h-full">
-              <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
-              <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>
-            </CardContent>
-          </Card>
+          <div className="cursor-pointer flex flex-col items-center justify-center h-full">
+            <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
+            <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>
+          </div>
         </DialogTrigger>
         <DialogContent className="p-6 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
           <DialogHeader>
@@ -194,17 +247,7 @@ function EducationCard({ item, index }: { item: EducationItemData; index: number
   )
 }
 
-function CertificationsGrid({ items }: { items: EducationItemData[] }) {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {items.map((item, index) => (
-        <CertificationCard key={index} item={item} index={index} />
-      ))}
-    </div>
-  )
-}
-
-function CertificationCard({ item, index }: { item: EducationItemData; index: number }) {
+function CertificationItem({ item, index }: { item: EducationItemData; index: number }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -212,16 +255,15 @@ function CertificationCard({ item, index }: { item: EducationItemData; index: nu
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="flex flex-col mx-auto bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg p-4 h-48" // Uniform size
     >
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
-          <Card className="cursor-pointer hover:shadow-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-shadow duration-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-700 rounded-lg">
-            <CardContent className="p-4 flex flex-col items-center justify-center h-full">
-              <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
-              <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>
-            </CardContent>
-          </Card>
+          <div className="cursor-pointer flex flex-col items-center justify-center h-full">
+            <Image src={item.logo} alt={`${item.institution} logo`} width={60} height={60} className="rounded-full mb-2" />
+            <h3 className="font-semibold text-center text-sm text-gray-800 dark:text-gray-200">{item.title}</h3>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{item.year}</p>
+          </div>
         </DialogTrigger>
         <DialogContent className="p-6 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
           <DialogHeader>
