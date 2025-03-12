@@ -15,7 +15,7 @@ import { AiFillHeart } from "react-icons/ai"
 import { DiDotnet } from "react-icons/di"
 import { SiPostgresql, SiSharp, SiDjango, SiFlask } from "react-icons/si"
 import { VscAzureDevops } from "react-icons/vsc"
-import { ChevronUp, Search, Filter } from "lucide-react"
+import { ChevronUp, Filter } from "lucide-react"
 
 // Define hobby data with icons
 const hobbies = [
@@ -207,20 +207,16 @@ export default function About() {
   const [expandedSoftSkill, setExpandedSoftSkill] = useState<number | null>(null)
   const [selectedSkill, setSelectedSkill] = useState<number | null>(null)
   const [skillFilter, setSkillFilter] = useState("all")
-  const [searchQuery, setSearchQuery] = useState("")
   const [isGridView, setIsGridView] = useState(true)
   const [viewMore, setViewMore] = useState(false)
 
   const skillsRef = useRef(null)
   const isSkillsInView = useInView(skillsRef, { once: false, amount: 0.2 })
 
-  // Filter skills based on category and search query
+  // Filter skills based on category
   const filteredSkills = technicalSkills.filter((skill) => {
     const matchesCategory = skillFilter === "all" || skill.category === skillFilter
-    const matchesSearch =
-      skill.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      skill.description.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
+    return matchesCategory
   })
 
   // Animation variants
@@ -323,19 +319,8 @@ export default function About() {
                     <CardDescription>Programming languages, frameworks, and tools I work with</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    {/* Search and filter controls */}
+                    {/* Filter controls */}
                     <div className="flex flex-col md:flex-row gap-4 mb-6 items-center">
-                      <div className="relative w-full md:w-1/3">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                        <input
-                          type="text"
-                          placeholder="Search skills..."
-                          className="pl-10 pr-4 py-2 w-full rounded-md border border-input bg-background text-sm ring-offset-background"
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                      </div>
-
                       <div className="flex items-center gap-2 w-full md:w-auto">
                         <Filter className="h-4 w-4 text-muted-foreground" />
                         <select
@@ -392,17 +377,16 @@ export default function About() {
                             transition={{ type: "spring", stiffness: 200, damping: 10 }}
                             className="mb-4 inline-block"
                           >
-                            <Search className="h-12 w-12 mx-auto text-muted-foreground/50" />
+                            <Filter className="h-12 w-12 mx-auto text-muted-foreground/50" />
                           </motion.div>
-                          <p>No skills match your search criteria.</p>
+                          <p>No skills match your filter criteria.</p>
                           <Button
                             variant="link"
                             onClick={() => {
-                              setSearchQuery("")
                               setSkillFilter("all")
                             }}
                           >
-                            Clear filters
+                            Clear filter
                           </Button>
                         </div>
                       ) : isGridView ? (
