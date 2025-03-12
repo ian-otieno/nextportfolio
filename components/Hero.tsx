@@ -27,16 +27,17 @@ const carouselMessages = [
 const descriptionMessage = "Explore my work, and let's connect!";
 
 const technologies = [
+  { name: "Python", icon: <FaPython className="text-blue-600 dark:text-blue-400" size={28} /> },
+  { name: "C#", icon: <SiSharp className="text-purple-600 dark:text-purple-400" size={28} /> },
   { name: "ASP.NET Core", icon: <SiDotnet className="text-purple-600 dark:text-purple-400" size={28} /> },
   { name: "Django", icon: <SiDjango className="text-green-700 dark:text-green-500" size={28} /> },
   { name: "Flask", icon: <FaFlask className="text-gray-800 dark:text-gray-200" size={26} /> },
-  { name: "React", icon: <FaReact className="text-blue-500 dark:text-blue-400" size={28} /> },
-  { name: "Next.js", icon: <SiNextdotjs className="text-black dark:text-white" size={28} /> },
   { name: "PostgreSQL", icon: <SiPostgresql className="text-blue-600 dark:text-blue-400" size={28} /> },
   { name: "Microsoft SQL", icon: <FaDatabase className="text-red-600 dark:text-red-400" size={28} /> },
-  { name: "Python", icon: <FaPython className="text-blue-600 dark:text-blue-400" size={28} /> },
-  { name: "C#", icon: <SiSharp className="text-purple-600 dark:text-purple-400" size={28} /> },
   { name: "JavaScript", icon: <FaJs className="text-yellow-500 dark:text-yellow-400" size={28} /> },
+  { name: "React", icon: <FaReact className="text-blue-500 dark:text-blue-400" size={28} /> },
+  { name: "Next.js", icon: <SiNextdotjs className="text-black dark:text-white" size={28} /> },
+ 
 ];
 
 export default function Home() {
@@ -161,11 +162,7 @@ export default function Home() {
                   {technologies.map((tech, index) => (
                     <motion.div
                       key={tech.name}
-                      className={`flex flex-col items-center justify-center p-3 rounded-lg ${
-                        activeTechIndex === index
-                          ? "bg-white dark:bg-gray-800 shadow-lg scale-110 z-20"
-                          : "bg-white/60 dark:bg-gray-800/60"
-                      } border border-gray-200 dark:border-gray-700 transition-all duration-300 min-w-[140px]`}
+                      className={`flex flex-col items-center justify-center p-3 transition-all duration-300 min-w-[140px]`}
                       animate={
                         activeTechIndex === index
                           ? {
