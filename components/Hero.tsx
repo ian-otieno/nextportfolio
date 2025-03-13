@@ -206,7 +206,7 @@ export default function Home() {
               onClick={toggleResumeVisibility}
             >
               <a
-                href={isResumeVisible ? "https://drive.google.com/file/d/1yk3DTLshEEKpgIftjHFBK0TtvhCCPdKn/view?usp=sharing" : "#"}
+                href={isResumeVisible ? "https://drive.google.com/file/d/1FVcZTnmPM2-021jc-7N3xkos2-X9RkuS/view?usp=sharing" : "#"}
                 target={isResumeVisible ? "_blank" : "_self"}
                 rel="noopener noreferrer"
                 className="flex items-center gap-2"
