@@ -21,10 +21,10 @@ const Contact = () => {
 
     try {
       await emailjs.sendForm(
-        "service_qjkd8g6", // Replace with your EmailJS service ID
-        "template_3rs0o8k", // Replace with your EmailJS template ID
+        "service_qjkd8g6", // Ensure this is your EmailJS service ID
+        "template_3rs0o8k", // Ensure this is your EmailJS template ID
         form,
-        "G1t49Wp6DWnw4R3wK" // Replace with your EmailJS public key
+        "G1t49Wp6DWnw4R3wK" // Ensure this is your EmailJS public key
       );
 
       setSuccess("Message sent successfully!");
@@ -67,7 +67,7 @@ const Contact = () => {
               className="border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-700"
             />
             <Input
-              type="text"
+              type="email"
               name="reply_to"
               placeholder="Your Email"
               required
