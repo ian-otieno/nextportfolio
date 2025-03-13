@@ -50,7 +50,7 @@ const technicalSkills = [
   {
     name: "ASP.NET Core",
     icon: <DiDotnet className="h-8 w-8 text-blue-600" />,
-    description: "Advanced skills in building web applications with MVC, Web API, and Razor Pages.",
+    description: "Advanced skills in building web applications with MVC and  Web API,.",
     proficiency: 85,
     category: "framework",
     color: "blue",
@@ -66,7 +66,7 @@ const technicalSkills = [
   {
     name: "React",
     icon: <FaReact className="h-8 w-8 text-cyan-500" />,
-    description: "Intermediate skills in building interactive UIs with hooks, context API, and state management.",
+    description: "Intermediate skills in building interactive UIs, context API, and state management.",
     proficiency: 75,
     category: "frontend",
     color: "cyan",
@@ -74,7 +74,7 @@ const technicalSkills = [
   {
     name: "Azure DevOps",
     icon: <VscAzureDevops className="h-8 w-8 text-blue-500" />,
-    description: "Intermediate level in CI/CD pipelines, build automation, and release management.",
+    description: "Intermediate level in CI/CD pipelines and release management.",
     proficiency: 70,
     category: "devops",
     color: "blue",
@@ -148,7 +148,7 @@ const technicalSkills = [
     name: "Microservices",
     icon: <FaMicrochip className="h-8 w-8 text-purple-500" />,
     description:
-      "Intermediate architecture design with experience in service communication patterns and containerization.",
+      "Intermediate architecture design with experience in service communication patterns.",
     proficiency: 70,
     category: "architecture",
     color: "purple",

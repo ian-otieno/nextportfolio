@@ -49,7 +49,6 @@ const serviceCategories = [
         details: [
           "Designing and implementing scalable API architectures",
           "Building secure authentication and authorization systems",
-          "Optimizing database queries and data access patterns",
           "Creating microservices and serverless functions",
              ],
       },
@@ -63,7 +62,6 @@ const serviceCategories = [
         details: [
           "Creating responsive layouts that work across all devices",
           "Building interactive UI components with React and Next.js",
-          "Optimizing for performance with code splitting and lazy loading",
           "Creating animations and transitions for enhanced user experience",
         ],
       },
@@ -79,11 +77,10 @@ const serviceCategories = [
         icon: Database,
         color: "#50E3C2",
         description:
-          "I work with Microsoft SQL and PostgreSQL, including schema design, optimization, indexing, and performance tuning for high-performance applications.",
+          "I work with Microsoft SQL and PostgreSQL, including schema design, optimization for high-performance applications.",
         tags: ["SQL Server", "PostgreSQL", "Optimization", "Schema Design"],
         details: [
           "Designing efficient database schemas and relationships",
-          "Optimizing queries for performance with proper indexing",
           "Implementing data migration strategies",
           "Setting up replication and high-availability solutions",
           "Creating backup and recovery procedures",
@@ -97,9 +94,8 @@ const serviceCategories = [
           "I configure CI/CD pipelines, manage cloud deployments, and use DevOps practices to ensure continuous integration and deployment for seamless updates.",
         tags: ["CI/CD", "IIS", "Azure", "Docker"],
         details: [
-          "Configuring containerization with Docker and Kubernetes",
+          "Configuring containerization with Docker",
           "Managing cloud infrastructure on IIS, Azure, ",
-          "Monitoring and logging solutions for application health",
           "Automating scaling and resource management",
         ],
       },
@@ -132,7 +128,6 @@ const serviceCategories = [
         details: [
           "Customizing core banking platforms for specific requirements",
           "Implementing financial processing products",
-          "Building regulatory compliance features",
           "Creating reporting and analytics for financial data",
         ],
       },
@@ -159,8 +154,6 @@ const serviceCategories = [
         tags: ["Maintenance", "Support", "Troubleshooting", "Updates"],
         details: [
           "Providing ongoing technical support and troubleshooting",
-          "Implementing security patches and updates",
-          "Performance monitoring and optimization",
           "Bug fixing and issue resolution",
           "Feature enhancements and improvements",
         ],
